@@ -15,27 +15,13 @@ class RoomsController < ApplicationController
     @room = Room.new
   end
 
-  # GET /rooms/1/edit
-  def edit
-  end
-
   # POST /rooms
   def create
     @room = Room.new(room_params)
-
     if @room.save
       redirect_to @room, notice: 'Room was successfully created.'
     else
       render :new
-    end
-  end
-
-  # PATCH/PUT /rooms/1
-  def update
-    if @room.update(room_params)
-      redirect_to @room, notice: 'Room was successfully updated.'
-    else
-      render :edit
     end
   end
 
@@ -46,13 +32,12 @@ class RoomsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_room
-      @room = Room.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def room_params
-      params.require(:room).permit(:name)
-    end
+  def set_room
+    @room = Room.find(params[:id])
+  end
+
+  def room_params
+    params.require(:room).permit(:name)
+  end
 end

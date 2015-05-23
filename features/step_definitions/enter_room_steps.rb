@@ -25,3 +25,7 @@ end
 Then(/^I should see a message (.+)$/) do |message|
   expect(page).to have_content(message)
 end
+
+Then(/^I should see a riddle question$/) do
+  expect(page).to have_content('What is')
+end

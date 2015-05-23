@@ -26,6 +26,11 @@ RSpec.describe RoomsController, type: :controller do
       get :show, {:id => room.to_param}, valid_session
       expect(assigns(:room)).to eq(room)
     end
+    it "assigns the current riddle as @riddle" do
+      room = Room.create! valid_attributes
+      get :show, {:id => room.to_param}, valid_session
+      expect(assigns(:riddle)).to be_a(Riddle)
+    end
   end
 
   describe "GET #new" do

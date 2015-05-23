@@ -9,6 +9,7 @@ Feature: Enter room
     When I fill in ExampleRoom in the room name field
     And I click the button Enter
     Then I should be in the room named ExampleRoom
+    And I should see a riddle question
 
   Scenario: Cannot enter nonexistent room
     Given I am on the home page

@@ -1,3 +1,5 @@
+require 'riddle/riddle'
+
 class RoomsController < ApplicationController
   before_action :set_room, only: [:show, :edit, :update, :destroy]
 
@@ -8,6 +10,7 @@ class RoomsController < ApplicationController
 
   # GET /rooms/1
   def show
+    @riddle = Riddle.new
   end
 
   # GET /rooms/new

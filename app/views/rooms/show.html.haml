@@ -1,9 +1,2 @@
-%p#notice= notice
-
-%p
-  %b Name:
-  = @room.name
-
-= link_to 'Edit', edit_room_path(@room)
-\|
-= link_to 'Back', rooms_path
+%h1= "You are in room #{@room.name}"
+= link_to 'Leave this room', '/'

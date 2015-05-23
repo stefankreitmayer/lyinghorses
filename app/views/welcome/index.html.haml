@@ -1,0 +1,9 @@
+%h1= 'Welcome'
+To take part in an activity, type in the name of the room where it is happening.
+- if notice
+  .notice
+    = notice
+= form_tag '/find_room' do
+  = label_tag 'Room name'
+  = text_field_tag :room_name
+  = submit_tag 'Enter'

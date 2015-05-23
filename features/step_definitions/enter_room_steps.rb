@@ -10,22 +10,18 @@ Given(/^I am on the home page$/) do
   visit '/'
 end
 
-When(/^I fill in ExampleRoom in the room name field$/) do
-  pending # express the regexp above with the code you wish you had
+When(/^I fill in (.+) in the room name field$/) do |text|
+  fill_in 'room_name', with: text
 end
 
-When(/^I click the link Enter$/) do
-  pending # express the regexp above with the code you wish you had
+When(/^I click the button Enter$/) do
+  click_button 'Enter'
 end
 
-Then(/^I should be in the room named ExampleRoom$/) do
-  pending # express the regexp above with the code you wish you had
+Then(/^I should be in the room named (.+)$/) do |text|
+  expect(page).to have_content('You are in room '+text)
 end
 
-When(/^I fill in DoesNotExist in the room name field$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^I should see a message This room does not exist\. Did you spell the name correctly\?$/) do
-  pending # express the regexp above with the code you wish you had
+Then(/^I should see a message (.+)$/) do |message|
+  expect(page).to have_content(message)
 end

@@ -73,6 +73,10 @@ RSpec.describe RoomsController, type: :controller do
     end
   end
 
+  describe "POST #select_answer" do
+    pending
+  end
+
   describe "DELETE #destroy" do
     it "destroys the requested room" do
       room = Room.create! valid_attributes

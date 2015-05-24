@@ -1,7 +1,8 @@
 require 'riddle/riddle_master'
 
 class RoomsController < ApplicationController
-  before_action :set_room, only: [:show, :edit, :update, :destroy]
+  before_action :set_room, only: [:show, :select_answer, :destroy]
+  before_action :set_riddle, only: [:show, :select_answer]
 
   # GET /rooms
   def index
@@ -10,9 +11,7 @@ class RoomsController < ApplicationController
 
   # GET /rooms/1
   def show
-    riddle_master = RiddleMaster.find_or_create(@room.name)
-    @selected_answer = 'foo'
-    @riddle = riddle_master.current_riddle
+    @selected_answer = nil
   end
 
   # GET /rooms/new
@@ -30,6 +29,12 @@ class RoomsController < ApplicationController
     end
   end
 
+  # POST /rooms/1
+  def select_answer
+    @selected_answer = params.require(:selected)
+    respond_to :js
+  end
+
   # DELETE /rooms/1
   def destroy
     @room.destroy
@@ -42,7 +47,15 @@ class RoomsController < ApplicationController
     @room = Room.find(params[:id])
   end
 
+  def set_riddle
+    @riddle = riddle_master.current_riddle
+  end
+
   def room_params
     params.require(:room).permit(:name)
+  end
+
+  def riddle_master
+    RiddleMaster.find_or_create(@room.name)
   end
 end

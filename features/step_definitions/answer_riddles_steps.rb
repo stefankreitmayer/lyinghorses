@@ -30,17 +30,19 @@ When(/^I select the (.+) answer$/) do |position|
   click_button @selected_answer
 end
 
+Given(/^the correct answer is selected$/) do
+  click_button riddle.correct_answer
+end
+
 Then(/^the (.+) answer should be shown as selected$/) do |position|
-  expect(page).to have_content('Your selected answer is: '+@selected_answer)
+  expect(page).to have_content('Your selected answer is: '+
+                               riddle.answers.send(position.to_sym))
+  expect(page).not_to have_content('Please select an answer')
 end
 
-When(/^the correct answer is revealed$/) do
-  pending
-  # expect(page).to have_content('The correct answer is')
-end
-
-Given(/^I selected the correct answer$/) do
-  pending # express the regexp above with the code you wish you had
+Then(/^nothing should be selected$/) do
+  expect(page).to have_content('Please select an answer')
+  expect(page).not_to have_content('Your selected answer is:')
 end
 
 When(/^the riddle closes$/) do

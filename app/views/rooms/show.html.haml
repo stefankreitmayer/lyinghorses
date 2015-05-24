@@ -3,8 +3,11 @@
   = "What is #{@riddle.question}"
 %p
   - @riddle.answers.each do |answer|
-    = button_tag answer
-%p
-  = "Your selected answer is: "+@selected_answer
+    = button_to answer, @room, {remote: true, params: {selected: answer}}
+#selected-answer
+  - if @selected_answer
+    = "Your selected answer is: "+@selected_answer
+  - else
+    = "Please select an answer"
 %p
   = link_to 'Leave this room', '/'

@@ -4,7 +4,6 @@ end
 
 Given(/^a room named (.+)$/) do |room_name|
   Room.create!(name: room_name)
-  RiddleMaster.new(room_name)
 end
 
 Given(/^I am on the home page$/) do

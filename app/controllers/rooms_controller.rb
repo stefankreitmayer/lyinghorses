@@ -10,7 +10,7 @@ class RoomsController < ApplicationController
 
   # GET /rooms/1
   def show
-    @riddle = RiddleMaster.find(@room.name).current_riddle
+    @riddle = RiddleMaster.find_or_create(@room.name).current_riddle
   end
 
   # GET /rooms/new
@@ -22,7 +22,6 @@ class RoomsController < ApplicationController
   def create
     @room = Room.new(room_params)
     if @room.save
-      RiddleMaster.new(@room.name)
       redirect_to @room, notice: 'Room was successfully created.'
     else
       render :new

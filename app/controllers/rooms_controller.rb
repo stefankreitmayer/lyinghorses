@@ -1,4 +1,4 @@
-require 'riddle/riddle'
+require 'riddle/riddle_master'
 
 class RoomsController < ApplicationController
   before_action :set_room, only: [:show, :edit, :update, :destroy]
@@ -10,7 +10,7 @@ class RoomsController < ApplicationController
 
   # GET /rooms/1
   def show
-    @riddle = Riddle.new
+    @riddle = RiddleMaster.find(@room.name).current_riddle
   end
 
   # GET /rooms/new
@@ -22,6 +22,7 @@ class RoomsController < ApplicationController
   def create
     @room = Room.new(room_params)
     if @room.save
+      RiddleMaster.new(@room.name)
       redirect_to @room, notice: 'Room was successfully created.'
     else
       render :new

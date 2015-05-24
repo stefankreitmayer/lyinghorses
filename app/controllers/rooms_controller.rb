@@ -10,7 +10,9 @@ class RoomsController < ApplicationController
 
   # GET /rooms/1
   def show
-    @riddle = RiddleMaster.find_or_create(@room.name).current_riddle
+    riddle_master = RiddleMaster.find_or_create(@room.name)
+    @selected_answer = 'foo'
+    @riddle = riddle_master.current_riddle
   end
 
   # GET /rooms/new

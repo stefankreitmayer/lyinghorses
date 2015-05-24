@@ -26,12 +26,12 @@ Given(/^I see a riddle$/) do
 end
 
 When(/^I select the (.+) answer$/) do |position|
-  @selected_answer = riddle.answers.send(postition.to_sym)
+  @selected_answer = riddle.answers.send(position.to_sym)
   click_button @selected_answer
 end
 
-Then(/^the (.+) answer should be shown as selected$/) do |postition|
-  pending # express the regexp above with the code you wish you had
+Then(/^the (.+) answer should be shown as selected$/) do |position|
+  expect(page).to have_content('Your selected answer is: '+@selected_answer)
 end
 
 When(/^the correct answer is revealed$/) do

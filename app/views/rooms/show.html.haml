@@ -1,5 +1,10 @@
 %h1= "You are in room #{@room.name}"
 .riddle-question
   = "What is #{@riddle.question}"
-= button_tag @riddle.correct_answer
-= link_to 'Leave this room', '/'
+%p
+  - @riddle.answers.each do |answer|
+    = button_tag answer
+%p
+  = "Your selected answer is: "+@selected_answer
+%p
+  = link_to 'Leave this room', '/'

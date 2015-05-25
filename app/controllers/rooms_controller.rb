@@ -11,7 +11,10 @@ class RoomsController < ApplicationController
 
   # GET /rooms/1
   def show
-    @selected_answer = nil
+    respond_to do |format|
+      format.js{@is_correct = riddle_master.selection_correct?}
+      format.html{}
+    end
   end
 
   # GET /rooms/new
@@ -32,6 +35,7 @@ class RoomsController < ApplicationController
   # POST /rooms/1
   def select_answer
     @selected_answer = params.require(:selected)
+    riddle_master.select(@selected_answer)
     respond_to :js
   end
 

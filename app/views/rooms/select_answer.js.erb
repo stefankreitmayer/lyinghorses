@@ -1,1 +1,6 @@
 $('#selected-answer').text('<%= "Your selected answer is: #{@selected_answer}"%>');
+$('#feedback').text('')
+setTimeout(function(){
+  $.getScript('<%= @room.id%>');
+  }, 1000
+);

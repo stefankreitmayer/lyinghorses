@@ -12,6 +12,14 @@ class RiddleMaster
     Riddle.new
   end
 
+  def selection_correct?
+    @selection == current_riddle.correct_answer
+  end
+
+  def select(answer)
+    @selection = answer
+  end
+
   private
 
   def initialize(room_name)

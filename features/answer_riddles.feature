@@ -1,23 +1,30 @@
-@javascript
 Feature: Answer riddles
   In order to learn and have fun
   As a user
   I want to answer some riddles
 
-  Scenario: Default selection
+  Scenario: No selection by default
     Given I see a riddle
-    Then nothing should be selected
+    Then no answer should be selected
+    And I should see a message Please select an answer
 
-  Scenario: Change selection
+  @javascript
+  Scenario: Selection is confirmed
     Given I see a riddle
-    When I select the first answer
-    Then the first answer should be shown as selected
-    When I select the second answer
-    Then the second answer should be shown as selected
+    When I select answer 2
+    Then answer 2 should be shown as selected
 
+  @javascript
   Scenario: Feedback on correct answer
     Given I see a riddle
-    And the correct answer is selected
-    When the riddle closes
-    Then I should see a message Your answer is correct
+    When I select the correct answer
+    And I wait a little
+    Then I should see a message Correct answer
+
+  @javascript
+  Scenario: Feedback on wrong answer
+    Given I see a riddle
+    When I select a wrong answer
+    And I wait a little
+    Then I should see a message Wrong answer
 

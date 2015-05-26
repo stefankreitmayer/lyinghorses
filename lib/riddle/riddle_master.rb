@@ -16,12 +16,12 @@ class RiddleMaster
     Riddle.new
   end
 
-  def selection_correct?
-    @selection == current_riddle.correct_answer
+  def selection_correct?(player)
+    @selections[player] == current_riddle.correct_answer
   end
 
-  def select(answer)
-    @selection = answer
+  def select(answer, player)
+    @selections[player] = answer
     close
   end
 
@@ -33,9 +33,17 @@ class RiddleMaster
 
   def initialize(room_name)
     @room_name = room_name
+    @selections = {}
   end
 
   def close
     @closing_time = Time.now
+    reward_winners
+  end
+
+  def reward_winners
+    @selections.keys.each do |player|
+      player.increment_score if selection_correct?(player)
+    end
   end
 end

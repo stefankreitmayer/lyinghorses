@@ -1,6 +1,7 @@
+$('.button-answer').prop("disabled",true);
 $('#selected-answer').text('<%= "Your selected answer is: #{@selected_answer}"%>');
 $('#feedback').text('')
 setTimeout(function(){
-  $.getScript('<%= @room.id%>');
+  $.getScript('<%= "#{room_path}/get_feedback"%>');
   }, 1000
 );

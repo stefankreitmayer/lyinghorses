@@ -10,6 +10,12 @@ def riddle
   riddle_master.current_riddle
 end
 
+def read_score
+  element = find('#score')
+  string = element.native.text
+  string[/\d+/]
+end
+
 Before do
   Room.delete_all
 end
@@ -18,7 +24,7 @@ After do
   Room.delete_all
 end
 
-Given(/^I see a riddle$/) do
+Given(/^I see a riddle question$/) do
   Room.create!(name: EXAMPLE_ROOM_NAME)
   visit '/'
   fill_in 'room_name', with: EXAMPLE_ROOM_NAME
@@ -53,14 +59,22 @@ Then(/^no answer should be selected$/) do
   expect(page).not_to have_content('Your selected answer is')
 end
 
-And(/^I wait a little$/) do
-  sleep(2)
-end
-
 And(/^I wait (\d+) seconds$/) do |n|
   sleep(n.to_i)
 end
 
-Then(/^I should see a different riddle$/) do
-    pending # express the regexp above with the code you wish you had
+Given(/^I see my score$/) do
+  @initial_score = read_score
+end
+
+Then(/^my score should be higher than before$/) do
+  expect(read_score).to be > @initial_score
+end
+
+Then(/^my score should be the same$/) do
+  expect(read_score).to eq @initial_score
+end
+
+Then(/^I should see a different riddle question$/) do
+  pending # express the regexp above with the code you wish you had
 end

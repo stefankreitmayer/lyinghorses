@@ -1,8 +1,10 @@
 require 'riddle/riddle_master'
+require 'riddle/player'
 
 class RoomsController < ApplicationController
-  before_action :set_room, only: [:show, :select_answer, :destroy]
-  before_action :set_riddle, only: [:show, :select_answer]
+  before_action :set_room, only: [:show, :select_answer, :get_feedback, :destroy]
+  before_action :set_riddle, only: [:show, :select_answer, :get_feedback]
+  before_action :set_player, only: [:show, :select_answer, :get_feedback]
 
   # GET /rooms
   def index
@@ -11,16 +13,6 @@ class RoomsController < ApplicationController
 
   # GET /rooms/1
   def show
-    respond_to do |format|
-      format.js do
-        @is_correct = riddle_master.selection_correct?
-        @expired = riddle_master.expired?
-        if @expired
-          RiddleMaster.destroy(@room.name)
-        end
-      end
-      format.html{}
-    end
   end
 
   # GET /rooms/new
@@ -38,10 +30,20 @@ class RoomsController < ApplicationController
     end
   end
 
-  # POST /rooms/1
+  # ajax POST
   def select_answer
     @selected_answer = params.require(:selected)
-    riddle_master.select(@selected_answer)
+    riddle_master.select(@selected_answer, @player)
+    respond_to :js
+  end
+
+  # ajax GET
+  def get_feedback
+    @is_correct = riddle_master.selection_correct?(@player)
+    @expired = riddle_master.expired?
+    if @expired
+      RiddleMaster.destroy(@room.name)
+    end
     respond_to :js
   end
 
@@ -59,6 +61,10 @@ class RoomsController < ApplicationController
 
   def set_riddle
     @riddle = riddle_master.current_riddle
+  end
+
+  def set_player
+    @player = Player.current
   end
 
   def room_params

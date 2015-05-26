@@ -21,7 +21,8 @@ Feature: Answer riddles
     When I select the correct answer
     And I wait 1 seconds
     Then my score should be higher than before
-    And I should see a different riddle question
+    When I wait 1 seconds
+    Then I should see a different riddle question
 
   @javascript
   Scenario: Feedback on wrong answer
@@ -29,5 +30,6 @@ Feature: Answer riddles
     And I see my score
     When I select a wrong answer
     And I wait 1 seconds
-    Then my score should be the same
-    And I should see a different riddle question
+    Then my score should be the same as before
+    When I wait 1 seconds
+    Then I should see a different riddle question

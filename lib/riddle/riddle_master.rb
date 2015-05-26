@@ -12,12 +12,12 @@ class RiddleMaster
     @instances.delete(room_name)
   end
 
-  def current_riddle
-    Riddle.new
+  def riddle
+    @riddle ||= Riddle.new
   end
 
   def selection_correct?(player)
-    @selections[player] == current_riddle.correct_answer
+    @selections[player] == riddle.correct_answer
   end
 
   def select(answer, player)

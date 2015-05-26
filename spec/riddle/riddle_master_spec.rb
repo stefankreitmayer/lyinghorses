@@ -6,6 +6,6 @@ RSpec.describe RiddleMaster do
     expect(RiddleMaster.find_or_create(12345)).to eq riddle_master
   end
   it 'provides a riddle' do
-    expect(riddle_master.current_riddle).to be_a(Riddle)
+    expect(riddle_master.riddle).to be_a(Riddle)
   end
 end

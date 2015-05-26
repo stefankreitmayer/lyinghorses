@@ -60,7 +60,7 @@ class RoomsController < ApplicationController
   end
 
   def set_riddle
-    @riddle = riddle_master.current_riddle
+    @riddle = riddle_master.riddle
   end
 
   def set_player

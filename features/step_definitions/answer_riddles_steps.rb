@@ -7,7 +7,11 @@ def riddle_master
 end
 
 def riddle
-  riddle_master.current_riddle
+  riddle_master.riddle
+end
+
+def read_question
+  find('#riddle-question').native.text
 end
 
 def read_score
@@ -29,6 +33,7 @@ Given(/^I see a riddle question$/) do
   visit '/'
   fill_in 'room_name', with: EXAMPLE_ROOM_NAME
   click_button 'Enter'
+  @initial_question = read_question
 end
 
 When(/^I select answer (\d+)$/) do |position|
@@ -71,10 +76,10 @@ Then(/^my score should be higher than before$/) do
   expect(read_score).to be > @initial_score
 end
 
-Then(/^my score should be the same$/) do
+Then(/^my score should be the same as before$/) do
   expect(read_score).to eq @initial_score
 end
 
 Then(/^I should see a different riddle question$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(read_question).not_to eq @initial_question
 end

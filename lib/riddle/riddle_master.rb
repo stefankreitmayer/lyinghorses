@@ -8,6 +8,10 @@ class RiddleMaster
     @instances[room_name] ||= self.new(room_name)
   end
 
+  def self.destroy(room_name)
+    @instances.delete(room_name)
+  end
+
   def current_riddle
     Riddle.new
   end
@@ -18,11 +22,20 @@ class RiddleMaster
 
   def select(answer)
     @selection = answer
+    close
+  end
+
+  def expired?
+    @closing_time && Time.now > @closing_time + 1.5
   end
 
   private
 
   def initialize(room_name)
     @room_name = room_name
+  end
+
+  def close
+    @closing_time = Time.now
   end
 end

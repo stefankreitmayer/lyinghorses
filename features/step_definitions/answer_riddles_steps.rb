@@ -56,3 +56,11 @@ end
 And(/^I wait a little$/) do
   sleep(2)
 end
+
+And(/^I wait (\d+) seconds$/) do |n|
+  sleep(n.to_i)
+end
+
+Then(/^I should see a different riddle$/) do
+    pending # express the regexp above with the code you wish you had
+end

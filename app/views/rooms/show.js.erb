@@ -1,2 +1,10 @@
 <%- feedback_text = @is_correct ? 'Correct answer' : 'Wrong answer' %>
 $('#feedback').text('<%= feedback_text%>')
+<%- if @expired%>
+  window.location.replace('/rooms/'+<%= @room.id%>)
+<%- else%>
+setTimeout(function(){
+  $.getScript('<%= @room.id%>');
+  }, 1000
+);
+<%- end%>

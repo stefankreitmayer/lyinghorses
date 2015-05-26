@@ -28,3 +28,9 @@ Feature: Answer riddles
     And I wait a little
     Then I should see a message Wrong answer
 
+  @javascript
+  Scenario: Proceed to next Riddle
+    Given I see a riddle
+    When I select answer 1
+    And I wait 2 seconds
+    Then I should see a different riddle

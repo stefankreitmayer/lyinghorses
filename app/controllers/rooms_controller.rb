@@ -12,7 +12,13 @@ class RoomsController < ApplicationController
   # GET /rooms/1
   def show
     respond_to do |format|
-      format.js{@is_correct = riddle_master.selection_correct?}
+      format.js do
+        @is_correct = riddle_master.selection_correct?
+        @expired = riddle_master.expired?
+        if @expired
+          RiddleMaster.destroy(@room.name)
+        end
+      end
       format.html{}
     end
   end

@@ -1,4 +1,5 @@
 require 'riddle/riddle_master'
+require 'riddle/riddle_factory'
 require 'riddle/player'
 
 class RoomsController < ApplicationController
@@ -72,6 +73,6 @@ class RoomsController < ApplicationController
   end
 
   def riddle_master
-    RiddleMaster.find_or_create(@room.name)
+    RiddleMaster.find_or_create(@room.name, RiddleFactory.new)
   end
 end

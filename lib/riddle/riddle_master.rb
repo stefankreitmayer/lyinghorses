@@ -2,8 +2,12 @@ require 'riddle/riddle'
 
 class RiddleMaster
   attr_reader :room_name
+  class << self
+    attr_reader :riddle_factory
+  end
 
-  def self.find_or_create(room_name)
+  def self.find_or_create(room_name, riddle_factory)
+    @riddle_factory = riddle_factory
     @instances = {} unless @instances
     @instances[room_name] ||= self.new(room_name)
   end
@@ -13,7 +17,7 @@ class RiddleMaster
   end
 
   def riddle
-    @riddle ||= Riddle.new
+    @riddle ||= self.class.riddle_factory.next
   end
 
   def selection_correct?(player)

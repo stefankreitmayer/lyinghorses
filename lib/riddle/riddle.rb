@@ -1,26 +1,11 @@
 class Riddle
-  def self.count
-    @count ||= 0
-  end
-  def self.increment_count
-    @count = count + 1
-  end
-
-  def question
-    '1000 + ' + self.class.count.to_s
-  end
-
-  def answers
-    %w(foo bar baz) << correct_answer
-  end
-
-  def correct_answer
-    "#{1000 + self.class.count}"
-  end
+  attr_reader :question, :answers, :correct_answer
 
   private
 
-  def initialize
-    self.class.increment_count
+  def initialize(question, answers, correct_answer)
+    @question = question
+    @answers = answers
+    @correct_answer = correct_answer
   end
 end

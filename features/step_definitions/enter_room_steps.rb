@@ -19,7 +19,7 @@ When(/^I click the button Enter$/) do
 end
 
 Then(/^I should be in the room named (.+)$/) do |text|
-  expect(page).to have_content('You are in room '+text)
+  expect(current_path).to eq "/rooms/#{text}"
 end
 
 Then(/^I should see a message (.+)$/) do |message|

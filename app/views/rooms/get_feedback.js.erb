@@ -1,7 +1,7 @@
 $('#score').text('Score: '+<%= @player.score %>)
 $('#feedback').text('<%= @is_correct ? 'Correct answer' : 'Wrong answer' %>')
 <%- if @expired %>
- window.location.replace('/rooms/'+<%= @room.id %>)
+ window.location.replace('<%= room_path(@room) %>')
 <%- else %>
 setTimeout(function(){
  $.getScript('<%= "#{room_path}/get_feedback" %>');

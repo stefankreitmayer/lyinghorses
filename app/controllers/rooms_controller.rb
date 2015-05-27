@@ -59,7 +59,9 @@ class RoomsController < ApplicationController
   private
 
   def set_room
-    @room = Room.find(params[:id])
+    @room = Room.find_by_name!(params[:name])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to '/', notice: 'No room was found by that name.'
   end
 
   def set_riddle

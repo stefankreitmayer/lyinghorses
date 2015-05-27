@@ -23,12 +23,12 @@ RSpec.describe RoomsController, type: :controller do
   describe "GET #show" do
     it "assigns the requested room as @room" do
       room = Room.create! valid_attributes
-      get :show, {:id => room.to_param}, valid_session
+      get :show, {:name => room.to_param}, valid_session
       expect(assigns(:room)).to eq(room)
     end
     it "assigns the current riddle as @riddle" do
       room = Room.create! valid_attributes
-      get :show, {:id => room.to_param}, valid_session
+      get :show, {:name => room.to_param}, valid_session
       expect(assigns(:riddle)).to be_a(Riddle)
     end
   end
@@ -81,13 +81,13 @@ RSpec.describe RoomsController, type: :controller do
     it "destroys the requested room" do
       room = Room.create! valid_attributes
       expect {
-        delete :destroy, {:id => room.to_param}, valid_session
+        delete :destroy, {:name => room.to_param}, valid_session
       }.to change(Room, :count).by(-1)
     end
 
     it "redirects to the rooms list" do
       room = Room.create! valid_attributes
-      delete :destroy, {:id => room.to_param}, valid_session
+      delete :destroy, {:name => room.to_param}, valid_session
       expect(response).to redirect_to(rooms_url)
     end
   end

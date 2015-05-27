@@ -2,7 +2,7 @@
 #score
   = "Score: #{@player.score}"
 #riddle-question
-  = "What is #{@riddle.question}"
+  = @riddle.question
 #answers
   - @riddle.answers.each do |answer|
     = button_to answer, @room, {remote: true, params: {selected: answer}, class: 'button-answer'}

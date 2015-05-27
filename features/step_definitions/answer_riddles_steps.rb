@@ -3,7 +3,7 @@ require 'riddle/riddle_master'
 EXAMPLE_ROOM_NAME = 'ExampleRoomName'
 
 def riddle_master
-  RiddleMaster.find_or_create(EXAMPLE_ROOM_NAME)
+  RiddleMaster.find_or_create(EXAMPLE_ROOM_NAME, RiddleFactory.new('vendor/assets/quiz_data/capitals_africa.csv'))
 end
 
 def riddle

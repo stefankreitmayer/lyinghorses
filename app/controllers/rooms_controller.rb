@@ -7,6 +7,8 @@ class RoomsController < ApplicationController
   before_action :set_riddle, only: [:show, :select_answer, :get_feedback]
   before_action :set_player, only: [:show, :select_answer, :get_feedback]
 
+  DEFAULT_RIDDLE_FACTORY = RiddleFactory.new('vendor/assets/quiz_data/capitals_africa.csv')
+
   # GET /rooms
   def index
     @rooms = Room.all
@@ -73,6 +75,6 @@ class RoomsController < ApplicationController
   end
 
   def riddle_master
-    RiddleMaster.find_or_create(@room.name, RiddleFactory.new)
+    RiddleMaster.find_or_create(@room.name, DEFAULT_RIDDLE_FACTORY)
   end
 end
